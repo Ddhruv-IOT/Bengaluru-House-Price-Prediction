@@ -1,4 +1,5 @@
-# Home-Price-Prediction-Project
+# Home Price Prediction Project
+## Python Machine Learning Project
 adding files of my new python prediction project (ML)
 
 
