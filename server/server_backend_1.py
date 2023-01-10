@@ -20,9 +20,8 @@ __locations = None
 __data_columns = None
 __model = None
 
-path = (r"C:/Users/ACER/Desktop/Workspace/spyder/Machine Learning" \
-        "/home price prediction project -1/datafiles/")
-        
+path = (r"../datafiles/")
+
 browser_address = ("C://Users//ACER//AppData//Local//Google//Chrome" \
                    "//Application//chrome.exe %s")
 
@@ -33,10 +32,10 @@ def open_browser():
 
 def get_est_price(location, sqft, rooms, bath):
     """ Try to predict the price """
-    
+
     try:
         loc_index = __data_columns.index(location.lower())
-    
+
     except IndexError:
         loc_index = -1
 
@@ -44,7 +43,7 @@ def get_est_price(location, sqft, rooms, bath):
     x[0] = sqft
     x[1] = bath
     x[2] = rooms
-    
+
     if loc_index >= 0:
         x[loc_index] = 1
 
@@ -52,7 +51,7 @@ def get_est_price(location, sqft, rooms, bath):
 
 def load_saved_artifacts():
     """ Loads the saved data files """
-    
+
     print("loading saved artifacts...start")
     global  __data_columns
     global __locations
@@ -106,17 +105,16 @@ def predict_home_price():
     response = jsonify({
         'estimated_price': get_est_price(location,total_sqft,bhk,bath)
     })
-    
+
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 
 if __name__ == "__main__":
-    
+
     print("Starting Python Flask Server For Home Price Prediction...")
     load_saved_artifacts()
     time.sleep(2)
     t.Thread(target=open_browser).start()
     time.sleep(2)
     app.run(debug=True)
-    
